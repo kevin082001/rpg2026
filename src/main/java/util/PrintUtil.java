@@ -49,5 +49,13 @@ public class PrintUtil {
         System.out.println(Colors.BLACK_BOLD + "This is black but bold!" + Colors.RESET);
         System.out.println(Colors.WHITE + "This is white!" + Colors.RESET);
         System.out.println(Colors.WHITE_BOLD + "This is white but bold (and also bright i guess if that makes sense)!" + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE_BOLD + "Background should now be black" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.WHITE_BOLD + "Background should now be red" + Colors.RESET);
+        System.out.println(Colors.BG_GREEN + Colors.WHITE_BOLD + "Background should now be green" + Colors.RESET);
+        System.out.println(Colors.BG_YELLOW + Colors.WHITE_BOLD + "Background should now be yellow" + Colors.RESET);
+        System.out.println(Colors.BG_BLUE + Colors.WHITE_BOLD + "Background should now be blue" + Colors.RESET);
+        System.out.println(Colors.BG_PURPLE + Colors.WHITE_BOLD + "Background should now be purple" + Colors.RESET);
+        System.out.println(Colors.BG_CYAN + Colors.WHITE_BOLD + "Background should now be cyan" + Colors.RESET);
+        System.out.println(Colors.BG_WHITE + Colors.BLACK + "Background should now be white and text black" + Colors.RESET);
     }
 }

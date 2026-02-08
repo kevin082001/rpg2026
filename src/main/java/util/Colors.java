@@ -22,4 +22,13 @@ public class Colors {
     public static final String PURPLE_BRIGHT = "\u001B[95m";
     public static final String CYAN_BRIGHT = "\u001B[96m";
     public static final String WHITE_BOLD = "\u001B[97m";
+
+    public static final String BG_BLACK = "\u001B[40m";
+    public static final String BG_RED = "\u001B[41m";
+    public static final String BG_GREEN = "\u001B[42m";
+    public static final String BG_YELLOW = "\u001B[43m";
+    public static final String BG_BLUE = "\u001B[44m";
+    public static final String BG_PURPLE = "\u001B[45m";
+    public static final String BG_CYAN = "\u001B[46m";
+    public static final String BG_WHITE = "\u001B[47m";
 }

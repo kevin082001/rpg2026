@@ -2,11 +2,16 @@ import util.PrintUtil;
 
 import java.util.Scanner;
 
+/**
+ * The game loop.</br>
+ * This class holds all variables which are relevant while playing. </br>
+ * (player stats, enemies, map, collection, ....)
+ */
 public class Game {
 
-    private static final Scanner sc = new Scanner(System.in);
+    private final static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public void start() {
         PrintUtil.clearScreen();
         PrintUtil.cmdEchoOff();
         System.out.println("Hallihallöchen");
