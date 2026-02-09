@@ -1,8 +1,12 @@
 package util;
 
+import game.metadata.SaveData;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.NonBlockingReader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class has everything from util methods for printing strings, </br>
@@ -35,28 +39,34 @@ public class PrintUtil {
         }
     }
 
-    public static void printSavefileSelect() {
+    public static void printSavefileSelect(List<SaveData> existingSaves) {
         try (Terminal terminal = TerminalBuilder.builder().system(true).build()) {
             // Enter raw mode to read keys immediately without pressing Enter
             terminal.enterRawMode();
             NonBlockingReader reader = terminal.reader();
 
-            String[] options = {"Start New Game", "Load Save", "Settings", "Exit"};
+            //String[] options = {"Start New Game", "Load Save", "Settings", "Exit"};
             int selectedIndex = 0;
             boolean running = true;
 
+            List<String> savenames = new ArrayList<>();
+            for (SaveData sd : existingSaves) {
+                savenames.add(sd.getUsername());
+            }
+            savenames.add(Colors.GREEN_BRIGHT + "NEW GAME");
+            savenames.add(Colors.RED_BRIGHT + "EXIT");
+
             while (running) {
-                // 1. Refresh Display
                 clearScreen();
                 System.out.flush();
                 System.out.println("=== rpg2026 - made by kevko ===");
-                System.out.println("Use Arrow Keys to navigate, Enter to select\n");
+                System.out.println();
 
-                for (int i = 0; i < options.length; i++) {
+                for (int i = 0; i < savenames.size(); i++) {
                     if (i == selectedIndex) {
-                        System.out.println(Colors.GREEN_BRIGHT + " > " + options[i] + Colors.RESET);
+                        System.out.println(Colors.BG_RED + Colors.WHITE_BOLD + " > " + savenames.get(i) + Colors.WHITE_BOLD + " < " + Colors.RESET);
                     } else {
-                        System.out.println("   " + options[i]);
+                        System.out.println(Colors.WHITE_BOLD + "   " + savenames.get(i) + Colors.RESET);
                     }
                 }
 
@@ -69,33 +79,34 @@ public class PrintUtil {
                         int next1 = reader.read();
                         int next2 = reader.read();
 
-                        if (next1 == 91 || next1 == 79) { // Standard '[' sequence
+                        if (next1 == 91 || next1 == 79) { // '['
                             if (next2 == 65) { // UP
                                 if (selectedIndex > 0) {
                                     selectedIndex--;
                                 }
                             } else if (next2 == 66) { // DOWN
-                                if (selectedIndex < options.length - 1) {
+                                if (selectedIndex < savenames.size() - 1) {
                                     selectedIndex++;
                                 }
                             }
                         }
                     }
                 } else if (code == 10 || code == 13) { // Enter Key
-                    System.out.println("\nAction: " + options[selectedIndex]);
-
-                    if (selectedIndex == 3) { // Exit
+                    if (selectedIndex == savenames.size() - 1) { // Exit
+                        System.out.println(Colors.RESET);
                         running = false;
                     } else {
-                        System.out.println("Loading " + options[selectedIndex] + "...");
+                        System.out.println(Colors.RESET);
+                        System.out.println("Loading " + savenames.get(selectedIndex) + "...");
                         Thread.sleep(1000); // Small pause for effect
+                        System.out.println(Colors.RESET);
                     }
-                } else if (code == 'q' || code == 'Q') {
+                } else if (code == 'q') { //secret debug stuff hehe
                     running = false;
                 }
             }
 
-            System.out.println("Goodbye!");
+            //System.out.println("Goodbye!");
 
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());

@@ -1,5 +1,9 @@
+import game.metadata.SaveData;
 import util.PrintUtil;
+import util.SavefileUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -15,7 +19,13 @@ public class Game {
         //PrintUtil.printColorTest();
 
         try {
-            PrintUtil.printSavefileSelect();
+            //TODO implement actual functionality to save and load files
+            //List<SaveData> allSaves = SavefileUtil.loadAllSavefiles();
+            List<SaveData> allSaves = new ArrayList<>();
+            allSaves.add(new SaveData("hero1"));
+            allSaves.add(new SaveData("kevko"));
+            allSaves.add(new SaveData("torvaldsthegoat1234"));
+            PrintUtil.printSavefileSelect(allSaves);
         } catch (Exception e) {
             e.printStackTrace();
         }
