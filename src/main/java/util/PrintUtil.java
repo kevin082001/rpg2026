@@ -1,8 +1,11 @@
 package util;
 
 import game.metadata.SaveData;
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
+import org.jline.utils.InfoCmp;
 import org.jline.utils.NonBlockingReader;
 
 import java.util.ArrayList;
@@ -39,13 +42,13 @@ public class PrintUtil {
         }
     }
 
-    public static void printSavefileSelect(List<SaveData> existingSaves) {
+    public static String printSavefileSelect(List<SaveData> existingSaves) {
         try (Terminal terminal = TerminalBuilder.builder().system(true).build()) {
             // Enter raw mode to read keys immediately without pressing Enter
             terminal.enterRawMode();
             NonBlockingReader reader = terminal.reader();
+            LineReader lineReader = LineReaderBuilder.builder().terminal(terminal).build();
 
-            //String[] options = {"Start New Game", "Load Save", "Settings", "Exit"};
             int selectedIndex = 0;
             boolean running = true;
 
@@ -57,18 +60,24 @@ public class PrintUtil {
             savenames.add(Colors.RED_BRIGHT + "EXIT");
 
             while (running) {
+                terminal.puts(InfoCmp.Capability.clear_screen);
+
                 clearScreen();
-                System.out.flush();
-                System.out.println("=== rpg2026 - made by kevko ===");
-                System.out.println();
+                terminal.flush();
+                terminal.writer().println("=== rpg2026 - made by kevko ===");
+                terminal.writer().println();
 
                 for (int i = 0; i < savenames.size(); i++) {
                     if (i == selectedIndex) {
-                        System.out.println(Colors.BG_RED + Colors.WHITE_BOLD + " > " + savenames.get(i) + Colors.WHITE_BOLD + " < " + Colors.RESET);
+                        terminal.writer().println(Colors.BG_RED + Colors.WHITE_BOLD + " > " + savenames.get(i) + Colors.WHITE_BOLD + " < " + Colors.RESET);
                     } else {
-                        System.out.println(Colors.WHITE_BOLD + "   " + savenames.get(i) + Colors.RESET);
+                        terminal.writer().println(Colors.WHITE_BOLD + "   " + savenames.get(i) + Colors.RESET);
                     }
                 }
+
+                //move cursor to "NEW GAME"
+                terminal.writer().print("\033[2A");
+                terminal.flush();
 
                 // 2. Read Input
                 int code = reader.read();
@@ -93,13 +102,25 @@ public class PrintUtil {
                     }
                 } else if (code == 10 || code == 13) { // Enter Key
                     if (selectedIndex == savenames.size() - 1) { // Exit
-                        System.out.println(Colors.RESET);
+                        terminal.writer().println(Colors.RESET);
                         running = false;
-                    } else {
-                        System.out.println(Colors.RESET);
-                        System.out.println("Loading " + savenames.get(selectedIndex) + "...");
+                    } else if (selectedIndex == savenames.size() - 2) { //New Game
+                        //clear line so user can enter name in-line
+                        terminal.writer().print("\r\033[K");
+                        terminal.flush();
+                        String name = lineReader.readLine("> ");
+
+                        //profile created!
+                        terminal.writer().println("\nProfile '" + name + "' created.\nPress any key to continue...");
+                        terminal.flush();
+                        reader.read();
+                        return name;
+                    } else { //Load profile
+                        terminal.writer().println(Colors.RESET);
+                        terminal.writer().println("Loading " + savenames.get(selectedIndex) + "...");
                         Thread.sleep(1000); // Small pause for effect
-                        System.out.println(Colors.RESET);
+                        terminal.writer().println(Colors.RESET);
+                        return savenames.get(selectedIndex);
                     }
                 } else if (code == 'q') { //secret debug stuff hehe
                     running = false;
@@ -111,6 +132,8 @@ public class PrintUtil {
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
+
+        return null;
     }
 
 

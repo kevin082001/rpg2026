@@ -6,19 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SavefileUtil {
-    private static List<SaveData> saves = new ArrayList<>();
+    private List<SaveData> saves = new ArrayList<>();
 
-    public static List<SaveData> loadAllSavefiles() {
+    public SavefileUtil() {
+        saves = this.loadAllSavefiles();
+    }
+
+    private List<SaveData> loadAllSavefiles() {
+        //look in the save directory and fetch the files
         return saves;
     }
 
-    public static SaveData loadSavefile(String username) {
+    public SaveData loadSavefile(String username) {
         if (username == null || username.trim().isEmpty()) {
             return null;
         }
 
-        for(SaveData save : saves) {
-            if(save.getUsername().equals(username)) {
+        //look in the save directory and fetch the correct file
+
+        for (SaveData save : saves) {
+            if (save.getUsername().equals(username)) {
                 return save;
             }
         }
@@ -26,9 +33,13 @@ public class SavefileUtil {
         return null;
     }
 
-    public static void create(SaveData data) {
-        if (data != null) {
-            //create new entry
+    public void createNew(String username) {
+        if (username != null) {
+            //create new entry and save onto system
         }
+    }
+
+    public List<SaveData> getSaves() {
+        return saves;
     }
 }

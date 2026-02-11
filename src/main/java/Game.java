@@ -20,12 +20,23 @@ public class Game {
 
         try {
             //TODO implement actual functionality to save and load files
-            //List<SaveData> allSaves = SavefileUtil.loadAllSavefiles();
-            List<SaveData> allSaves = new ArrayList<>();
+            SavefileUtil sfu = new SavefileUtil();
+            List<SaveData> allSaves = sfu.getSaves();
+            /*List<SaveData> allSaves = new ArrayList<>();
             allSaves.add(new SaveData("hero1"));
             allSaves.add(new SaveData("kevko"));
-            allSaves.add(new SaveData("torvaldsthegoat1234"));
-            PrintUtil.printSavefileSelect(allSaves);
+            allSaves.add(new SaveData("torvaldsthegoat1234"));*/
+            String profileToLoad = PrintUtil.printSavefileSelect(allSaves);
+            if(profileToLoad != null && !profileToLoad.isEmpty()) {
+                for(SaveData save : allSaves) {
+                    if(save.getUsername().equals(profileToLoad)) {
+                        sfu.loadSavefile(profileToLoad);
+                    }
+                }
+
+                //new profile
+                sfu.createNew(profileToLoad);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
