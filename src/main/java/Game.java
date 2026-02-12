@@ -2,7 +2,6 @@ import game.metadata.SaveData;
 import util.PrintUtil;
 import util.SavefileUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
