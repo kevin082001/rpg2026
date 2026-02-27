@@ -1,3 +1,8 @@
+# --- Custom (Save Files, etc.)
+saves/
+
+
+
 # --- Java / Compiled Files ---
 *.class
 *.log
