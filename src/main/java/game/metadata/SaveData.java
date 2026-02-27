@@ -11,6 +11,9 @@ public class SaveData {
         this.lastSaved = LocalDateTime.now();
     }
 
+    public SaveData() {
+    }
+
     public String getUsername() {
         return username;
     }

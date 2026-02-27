@@ -122,13 +122,10 @@ public class PrintUtil {
                         terminal.writer().println(Colors.RESET);
                         return savenames.get(selectedIndex);
                     }
-                } else if (code == 'q') { //secret debug stuff hehe
+                } else if (code == 'q') { //debug shortcut ;)
                     running = false;
                 }
             }
-
-            //System.out.println("Goodbye!");
-
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }

@@ -18,22 +18,22 @@ public class Game {
         //PrintUtil.printColorTest();
 
         try {
-            //TODO implement actual functionality to save and load files
             SavefileUtil sfu = new SavefileUtil();
             List<SaveData> allSaves = sfu.getSaves();
-            /*List<SaveData> allSaves = new ArrayList<>();
-            allSaves.add(new SaveData("hero1"));
-            allSaves.add(new SaveData("kevko"));
-            allSaves.add(new SaveData("torvaldsthegoat1234"));*/
+            Thread.sleep(2000);
             String profileToLoad = PrintUtil.printSavefileSelect(allSaves);
-            if(profileToLoad != null && !profileToLoad.isEmpty()) {
-                for(SaveData save : allSaves) {
-                    if(save.getUsername().equals(profileToLoad)) {
+            if (profileToLoad != null && !profileToLoad.isEmpty()) {
+                System.out.println("blub");
+                for (SaveData save : allSaves) {
+                    System.out.println("Checking: " + save.getUsername() + ".save");
+                    if (save.getUsername().equals(profileToLoad)) {
+                        System.out.println("will load: " + save.getUsername() + ".save");
                         sfu.loadSavefile(profileToLoad);
                     }
                 }
 
                 //new profile
+                System.out.println("creating new profile for player '" + profileToLoad + "'");
                 sfu.createNew(profileToLoad);
             }
         } catch (Exception e) {
