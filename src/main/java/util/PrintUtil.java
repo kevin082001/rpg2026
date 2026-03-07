@@ -133,7 +133,10 @@ public class PrintUtil {
         return null;
     }
 
-
+    public static int printUserMainMenu(SaveData user) {
+        //TODO
+        return 0;
+    }
 
 
     //------------------------------------------
