@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Game {
 
     private final static Scanner sc = new Scanner(System.in);
+    private static SaveData user;
 
     public void start() {
         //PrintUtil.printColorTest();
@@ -23,12 +24,10 @@ public class Game {
             Thread.sleep(2000);
             String profileToLoad = PrintUtil.printSavefileSelect(allSaves);
             if (profileToLoad != null && !profileToLoad.isEmpty()) {
-                System.out.println("blub");
                 for (SaveData save : allSaves) {
-                    System.out.println("Checking: " + save.getUsername() + ".save");
                     if (save.getUsername().equals(profileToLoad)) {
-                        System.out.println("will load: " + save.getUsername() + ".save");
-                        sfu.loadSavefile(profileToLoad);
+                        user = sfu.loadSavefile(profileToLoad);
+                        return;
                     }
                 }
 

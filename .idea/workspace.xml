@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32ca9c82-ccf2-4e2d-b9be-d2be1176f19d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/metadata/SaveData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/metadata/SaveData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/util/PrintUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/PrintUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/SavefileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/SavefileUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,28 +47,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Game.executor": "Run",
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "savefiles-and-main-menu",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Data/Arbeit/TaskIT",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Game.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;savefiles-and-main-menu&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Data/Arbeit/TaskIT&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Data\Privat\IdeaProjects\Java\rpg2026" />
       <recent name="C:\Data\Privat\IdeaProjects\Java\rpg2026\saves" />
     </key>
   </component>
@@ -124,7 +122,14 @@
       <workItem from="1771704552045" duration="77000" />
       <workItem from="1771873878423" duration="1000" />
       <workItem from="1772212778933" duration="208000" />
-      <workItem from="1772213105393" duration="2397000" />
+      <workItem from="1772213105393" duration="3250000" />
+      <workItem from="1772223797909" duration="88000" />
+      <workItem from="1772223891560" duration="1000" />
+      <workItem from="1772237939190" duration="1915000" />
+      <workItem from="1772363312313" duration="1224000" />
+      <workItem from="1772399058197" duration="1312000" />
+      <workItem from="1772652235178" duration="2220000" />
+      <workItem from="1772814742957" duration="4320000" />
     </task>
     <servers />
   </component>
