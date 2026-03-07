@@ -1,5 +1,8 @@
+import game.metadata.SaveData;
 import util.PrintUtil;
+import util.SavefileUtil;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -10,15 +13,31 @@ import java.util.Scanner;
 public class Game {
 
     private final static Scanner sc = new Scanner(System.in);
+    private static SaveData user;
 
     public void start() {
-        PrintUtil.clearScreen();
-        PrintUtil.cmdEchoOff();
-        System.out.println("Hallihallöchen");
-        PrintUtil.printColorTest();
-        System.out.print("Please enter your name:");
-        String name = sc.nextLine();
-        PrintUtil.clearScreen();
-        System.out.println("Hello, " + name);
+        //PrintUtil.printColorTest();
+
+        try {
+            SavefileUtil sfu = new SavefileUtil();
+            List<SaveData> allSaves = sfu.getSaves();
+            Thread.sleep(2000);
+            String profileToLoad = PrintUtil.printSavefileSelect(allSaves);
+            if (profileToLoad != null && !profileToLoad.isEmpty()) {
+                for (SaveData save : allSaves) {
+                    if (save.getUsername().equals(profileToLoad)) {
+                        user = sfu.loadSavefile(profileToLoad);
+                        return;
+                    }
+                }
+
+                //new profile
+                System.out.println("creating new profile for player '" + profileToLoad + "'");
+                sfu.createNew(profileToLoad);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

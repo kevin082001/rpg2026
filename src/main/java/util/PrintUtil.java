@@ -1,10 +1,34 @@
 package util;
 
+import game.metadata.SaveData;
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
+import org.jline.utils.InfoCmp;
+import org.jline.utils.NonBlockingReader;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This class has everything from util methods for printing strings, </br>
  * formatting output, printing stuff in a certain color or clearing the screen.
  */
 public class PrintUtil {
+    public static void cmdEchoOff() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "@echo off").inheritIO().start().waitFor();
+            } else {
+                //only supported for windows cmd
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void clearScreen() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
@@ -18,18 +42,103 @@ public class PrintUtil {
         }
     }
 
-    public static void cmdEchoOff() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "@echo off").inheritIO().start().waitFor();
-            } else {
-                //only supported for windows cmd
-                return;
+    public static String printSavefileSelect(List<SaveData> existingSaves) {
+        try (Terminal terminal = TerminalBuilder.builder().system(true).build()) {
+            // Enter raw mode to read keys immediately without pressing Enter
+            terminal.enterRawMode();
+            NonBlockingReader reader = terminal.reader();
+            LineReader lineReader = LineReaderBuilder.builder().terminal(terminal).build();
+
+            int selectedIndex = 0;
+            boolean running = true;
+
+            List<String> savenames = new ArrayList<>();
+            for (SaveData sd : existingSaves) {
+                savenames.add(sd.getUsername());
+            }
+            savenames.add(Colors.GREEN_BRIGHT + "NEW GAME");
+            savenames.add(Colors.RED_BRIGHT + "EXIT");
+
+            while (running) {
+                terminal.puts(InfoCmp.Capability.clear_screen);
+
+                clearScreen();
+                terminal.flush();
+                terminal.writer().println("=== rpg2026 - made by kevko ===");
+                terminal.writer().println();
+
+                for (int i = 0; i < savenames.size(); i++) {
+                    if (i == selectedIndex) {
+                        terminal.writer().println(Colors.BG_RED + Colors.WHITE_BOLD + " > " + savenames.get(i) + Colors.WHITE_BOLD + " < " + Colors.RESET);
+                    } else {
+                        terminal.writer().println(Colors.WHITE_BOLD + "   " + savenames.get(i) + Colors.RESET);
+                    }
+                }
+
+                //move cursor to "NEW GAME"
+                terminal.writer().print("\033[2A");
+                terminal.flush();
+
+                // 2. Read Input
+                int code = reader.read();
+
+                if (code == 27) { // Escape sequence (Arrow keys start with 27)
+                    // Check if more characters are waiting (the [ and A/B/C/D)
+                    if (reader.peek(10) != -2) {
+                        int next1 = reader.read();
+                        int next2 = reader.read();
+
+                        if (next1 == 91 || next1 == 79) { // '['
+                            if (next2 == 65) { // UP
+                                if (selectedIndex > 0) {
+                                    selectedIndex--;
+                                }
+                            } else if (next2 == 66) { // DOWN
+                                if (selectedIndex < savenames.size() - 1) {
+                                    selectedIndex++;
+                                }
+                            }
+                        }
+                    }
+                } else if (code == 10 || code == 13) { // Enter Key
+                    if (selectedIndex == savenames.size() - 1) { // Exit
+                        terminal.writer().println(Colors.RESET);
+                        running = false;
+                    } else if (selectedIndex == savenames.size() - 2) { //New Game
+                        //clear line so user can enter name in-line
+                        terminal.writer().print("\r\033[K");
+                        terminal.flush();
+                        String name = lineReader.readLine("> ");
+
+                        //profile created!
+                        terminal.writer().println("\nProfile '" + name + "' created.\nPress any key to continue...");
+                        terminal.flush();
+                        reader.read();
+                        return name;
+                    } else { //Load profile
+                        terminal.writer().println(Colors.RESET);
+                        terminal.writer().println("Loading " + savenames.get(selectedIndex) + "...");
+                        Thread.sleep(1000); // Small pause for effect
+                        terminal.writer().println(Colors.RESET);
+                        return savenames.get(selectedIndex);
+                    }
+                } else if (code == 'q') { //debug shortcut ;)
+                    running = false;
+                }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Error: " + e.getMessage());
         }
+
+        return null;
     }
+
+
+
+
+    //------------------------------------------
+    //Testing methods
+    //------------------------------------------
 
     public static void printColorTest() {
         System.out.println(Colors.GREEN + "This is green!" + Colors.RESET);
