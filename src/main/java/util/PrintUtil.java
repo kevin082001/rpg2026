@@ -10,12 +10,15 @@ import org.jline.utils.NonBlockingReader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * This class has everything from util methods for printing strings, </br>
  * formatting output, printing stuff in a certain color or clearing the screen.
  */
 public class PrintUtil {
+    private static final Scanner sc = new Scanner(System.in);
+
     public static void cmdEchoOff() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
@@ -134,8 +137,13 @@ public class PrintUtil {
     }
 
     public static int printUserMainMenu(SaveData user) {
-        //TODO
-        return 0;
+        System.out.println("1) Fight");
+        System.out.println("2) Map");
+        System.out.println("3) Notebook");
+        System.out.println("4) Bag");
+        System.out.println("5) Collection");
+        System.out.println("6) Exit game");
+        return sc.nextInt();
     }
 
 
