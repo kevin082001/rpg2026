@@ -27,11 +27,7 @@ public class Game {
                 for (SaveData save : allSaves) {
                     if (save.getUsername().equals(profileToLoad)) {
                         user = sfu.loadSavefile(profileToLoad);
-
-                        //TODO open user main menu (fight, map, notebook, shop, etc...)
                         userMainMenu();
-                        //TODO checking what was selected
-
                         return;
                     }
                 }
