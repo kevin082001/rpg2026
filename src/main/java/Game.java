@@ -27,6 +27,7 @@ public class Game {
                 for (SaveData save : allSaves) {
                     if (save.getUsername().equals(profileToLoad)) {
                         user = sfu.loadSavefile(profileToLoad);
+                        userMainMenu();
                         return;
                     }
                 }
@@ -39,5 +40,49 @@ public class Game {
             e.printStackTrace();
         }
 
+    }
+
+    private void userMainMenu() {
+        int userMainMenuChoice = PrintUtil.printUserMainMenu(user);
+        switch (userMainMenuChoice) {
+            case 1:
+                PrintUtil.clearScreen();
+                System.out.println("fight");
+                break;
+            case 2:
+                PrintUtil.clearScreen();
+                System.out.println("map");
+                break;
+            case 3:
+                PrintUtil.clearScreen();
+                System.out.println("notebook");
+                break;
+            case 4:
+                PrintUtil.clearScreen();
+                System.out.println("bag");
+                break;
+            case 5:
+                PrintUtil.clearScreen();
+                System.out.println("collection");
+                break;
+            case 6:
+                try {
+                    PrintUtil.clearScreen();
+                    System.out.println("Goodbye");
+                    Thread.sleep(1000);
+                    System.exit(67);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            default:
+                try {
+                    PrintUtil.clearScreen();
+                    System.out.println("invalid option. try again.");
+                    Thread.sleep(1500);
+                    userMainMenu();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+        }
     }
 }
