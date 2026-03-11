@@ -1,6 +1,7 @@
 package util;
 
 import game.metadata.SaveData;
+import game.objects.CollectibleCard;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
 import org.jline.terminal.Terminal;
@@ -153,6 +154,25 @@ public class PrintUtil {
         System.out.println("3) Go back");
         System.out.print(">");
         return sc.nextInt();
+    }
+
+    public static int printCardCollectionMenu(List<CollectibleCard> all, List<CollectibleCard> collected) {
+        int allAmount = all.size();
+        int collectedAmount = collected.size();
+        int tmp = collectedAmount * 1000 / allAmount;
+        double percent = (double) tmp / 10;
+
+        System.out.println("Collection: " + collectedAmount + " / " + allAmount + " (" + percent + " %)");
+        System.out.println();
+        System.out.println();
+
+        for (CollectibleCard c : all) {
+            System.out.println("(" + c.getId() + ") " + c.getName());
+            System.out.println(c.getDescription());
+            System.out.println();
+        }
+
+        return 0;
     }
 
 

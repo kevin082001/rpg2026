@@ -1,7 +1,10 @@
 import game.metadata.SaveData;
+import game.objects.CollectibleCard;
+import util.GameObjectsInitializor;
 import util.PrintUtil;
 import util.SavefileUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,6 +17,8 @@ public class Game {
 
     private final static Scanner sc = new Scanner(System.in);
     private static SaveData user;
+    private static List<CollectibleCard> allCards = GameObjectsInitializor.initCollectibleCards();
+    private static List<CollectibleCard> collectedCards = new ArrayList<>();
 
     public void start() {
         //PrintUtil.printColorTest();
@@ -92,8 +97,8 @@ public class Game {
         int option = PrintUtil.printUserCollectionMenu();
         switch (option) {
             case 1:
-                //view collected cards
-                System.out.println("cards");
+                PrintUtil.clearScreen();
+                PrintUtil.printCardCollectionMenu(allCards, collectedCards);
                 break;
             case 2:
                 //view achievements
