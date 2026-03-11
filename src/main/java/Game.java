@@ -43,6 +43,7 @@ public class Game {
     }
 
     private void userMainMenu() {
+        PrintUtil.clearScreen();
         int userMainMenuChoice = PrintUtil.printUserMainMenu(user);
         switch (userMainMenuChoice) {
             case 1:
@@ -63,7 +64,7 @@ public class Game {
                 break;
             case 5:
                 PrintUtil.clearScreen();
-                System.out.println("collection");
+                printCollection();
                 break;
             case 6:
                 try {
@@ -80,6 +81,33 @@ public class Game {
                     System.out.println("invalid option. try again.");
                     Thread.sleep(1500);
                     userMainMenu();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+        }
+    }
+
+    private void printCollection() {
+        PrintUtil.clearScreen();
+        int option = PrintUtil.printUserCollectionMenu();
+        switch (option) {
+            case 1:
+                //view collected cards
+                System.out.println("cards");
+                break;
+            case 2:
+                //view achievements
+                System.out.println("achievements");
+                break;
+            case 3:
+                userMainMenu();
+                break;
+            default:
+                try {
+                    PrintUtil.clearScreen();
+                    System.out.println("invalid option. try again.");
+                    Thread.sleep(1500);
+                    printCollection();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

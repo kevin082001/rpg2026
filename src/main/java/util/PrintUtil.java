@@ -143,6 +143,15 @@ public class PrintUtil {
         System.out.println("4) Bag");
         System.out.println("5) Collection");
         System.out.println("6) Exit game");
+        System.out.print(">");
+        return sc.nextInt();
+    }
+
+    public static int printUserCollectionMenu() {
+        System.out.println("1) Card collection");
+        System.out.println("2) Achievements");
+        System.out.println("3) Go back");
+        System.out.print(">");
         return sc.nextInt();
     }
 
